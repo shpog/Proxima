@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Proxima</title>
+  </head>
+  <body>
+		<div id="content">
+			<div id="subcontent">
+				<h2 id="phr2"></h2>
+				<h1 id="phr1">Loading</h1>
+			</div>
+		</div>
+		
+
+		<!-- Styles -->
+		<style>
+			@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
+			*{
+				font-family: 'Open Sans', sans-serif;
+				
+				box-sizing:border-box;
+				padding:0;
+				margin:0;
+				color:white;
+				font-weight:300;
+			}
+			body{
+				background:black;
+			}
+
+			#content{
+				position:fixed;
+				top:0;
+				left:0;
+				width:100%;
+				height:100%;
+				text-align:center;
+			}
+
+			#subcontent{
+				display:inline-block;
+				transition:margin 0.5s;
+			}
+
+			#phr1, #phr2{
+				vertical-align:middle;
+			}
+			#phr1{
+				font-size:250%;
+			}
+			#phr2{
+				margin-bottom:25px;
+			}
+		</style>
+
+		<!-- Scripts -->
+		<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/qna"></script>
+		<script src="index.js"></script>
+		<script>
+			// smooth animations handler
+			// refresh avery 0.25s
+			setInterval(e=>{
+				document.querySelector('#subcontent').style.margin = ((window.innerHeight/2-document.querySelector('#subcontent').offsetHeight)) + 'px 10%'
+			},250)
+
+			// load bert
+			// animations handler refresh time = 0.25s
+			// animation time = 0.5s
+			// 0.25s + 0.5s = 0.75s ~ 0.8s
+		  setTimeout(e=>{qna.load().then(model => {main(model)})},800)
+
+		</script>
+		
+  </body>
+</html>
